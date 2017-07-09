@@ -1,0 +1,70 @@
+adehabitatLT # packages can contain comments
+animation
+bitops
+CircStats
+changepoint
+chron
+codetools
+combinat
+cubature
+data.table
+devtools
+distr
+extrafont
+fAsianOptions
+fields
+fpc
+ggm
+ggmap
+gridBase
+httr
+igraph
+knitr
+leaflet
+lubridate
+maptools
+microbenchmark
+msm
+nabor # stplanr dep
+OpenStreetMap
+openxlsx
+osmar
+plyr
+poweRlaw
+pracma
+quantreg
+R.utils # stplanr dep
+R2Cuba
+RANN
+raster 
+Rcpp
+RcppArmadillo # stplanr dep
+RCurl
+readxl
+rgdal
+rgeos
+rgl
+RgoogleMaps # stplanr dep
+rJava
+rjson
+rmarkdown
+roxygen2 
+RPostgreSQL
+RSQLite
+rvest
+sf
+signal
+sp
+spacetime
+spatialkernel
+spatstat
+spdep
+testthat
+tidyverse
+tmap
+tripack
+units # sf dep
+VGAM
+XML
+xml2
+yaml

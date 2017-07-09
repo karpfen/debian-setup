@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# These packages have necessary updated versions beyond those installed with
+# texlive.
+
+function latexpkgs {
+    tcolorbox
+    titlesec
+}
+
+function tcolorbox {
+    TCNAME="tcolorbox"
+    URL="http://mirrors.ctan.org/install/macros/latex/contrib/tcolorbox.tds.zip"
+    show_header 'Downloading '$TCNAME
+     wget $URL
+    unzip "tcolorbox.tds.zip" -d "tcolorbox"
+     cp -rf tcolorbox/tex/latex/tcolorbox/ /usr/share/texlive/texmf-dist/tex/latex/tcolorbox/
+    rm -rf tcolorbox tcolorbox.tds.zip
+}
+
+function titlesec {
+    # Update from 2.10.1 -> 2.10.2
+    # TODO: Delete this once texlive version == 2.10.2
+    TSNAME="titlesec"
+    URL="http://mirrors.ctan.org/install/macros/latex/contrib/titlesec.tds.zip"
+    show_header 'Downloading '$TSNAME
+     wget $URL
+    unzip "titlesec.tds.zip" -d "titlesec"
+     cp -rf titlesec/tex/latex/titlesec/ /usr/share/texlive/texmf-dist/tex/latex/titlesec/
+    rm -rf titlesec titlesec.tds.zip
+}

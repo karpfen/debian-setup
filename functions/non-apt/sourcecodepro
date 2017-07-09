@@ -1,0 +1,45 @@
+#!/bin/bash
+
+SCDIR="/usr/share/fonts/opentype/Source Code Pro"
+
+function install_sourcecodepro {
+    URL="https://github.com/adobe-fonts/source-code-pro/releases/latest"
+    URL=$(curl -s $URL | grep 'href' | head -n 1 | cut -d '"' -f 2)
+    # TODO: Improvide the next 3 lines:
+    ARCHIVE=${URL/"https://github.com/adobe-fonts/"}
+    ARCHIVE=${ARCHIVE/"releases/tag/"}
+    ARCHIVE=${ARCHIVE////-}
+    URL="https://github.com"$(curl -s $URL | grep '.tar.gz' | head -n 1 | cut -d '"' -f 2)
+    show_header 'Downloading '$NAME
+     wget $URL
+    show_header 'installing '$NAME' ...'
+    FILE=$(echo $URL | rev | head -n 1 | cut -d '/' -f 1 | rev)
+    tar -xzf $FILE
+    cd $ARCHIVE"/OTF"
+     mkdir "$SCDIR"
+     cp -r * "$SCDIR/"
+    fc-cache -f -v
+
+    # Cleanup and finish
+    cd ../..
+     rm -rf $FILE $ARCHIVE
+}
+
+
+# sourcecodepro
+function sourcecodepro {
+	SCNAME="Source Code Pro"
+    SCDIR="/usr/share/fonts/opentype/Source Code Pro"
+
+    if [ -d "$SCDIR" ]; then
+        show_info $SCNAME' already installed'
+        whiptail --title "$SCNAME" --msgbox "$SCNAME already installed." 8 78
+        nonapt
+    else
+        install_sourcecodepro
+        # Done
+        show_success 'Done.'
+        whiptail --title "Finished" --msgbox "Installing $SCNAME complete." 8 78
+        nonapt
+    fi
+}

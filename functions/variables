@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#DIR="$(dirname "$0")"
+KEYS="$DIR/data/keys.list"
+REPOS="$DIR/data/repos.list"
+DEPS="$DIR/data/dependencies.list"
+PKGS="$DIR/data/packages.list"
+PKGST="$DIR/data/packages-texlive.list"
+
+RPKGS="$DIR/data/rpackages.list"
+RPKGS_NI=()
+INST=$(Rscript -e "rownames (installed.packages ())")
+while read F ; do
+    # cut comments from package names and remove all whitespace
+    PF=$(echo $F | cut -d "#" -f 1 | tr -d '[:space:]') 
+    if [[ ! ${INST[*]} =~ $PF ]]
+    then
+        RPKGS_NI+=($PF)
+    fi
+done < $RPKGS
+CRAN="https://cran.r-project.org"
+RLIBLOC="/usr/local/lib/R/site-library/"
+
+PYPKGS=("numpy" "scipy" "matplotlib" "pandas" "sympy" "nose" "psutil")

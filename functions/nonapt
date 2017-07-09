@@ -1,0 +1,37 @@
+#!/bin/bash
+
+. $DIR/functions/non-apt/instvim
+. $DIR/functions/non-apt/instpandoc
+. $DIR/functions/non-apt/instpython
+. $DIR/functions/non-apt/sourcecodepro
+. $DIR/functions/non-apt/travis
+. $DIR/functions/non-apt/rpackages
+. $DIR/functions/non-apt/latex-pkgs
+
+# Install non-apt packages
+function nonapt {
+    eval `resize`
+    NONAPT=$(whiptail \
+        --notags \
+        --title "non-apt packages" \
+        --menu "\nWhat non-apt packages would you like to install/update?" \
+        --ok-button "Install/Update" \
+        --cancel-button "Go Back" \
+        $LINES $COLUMNS $(( $LINES - 12 )) \
+        'install_vim'       '1. vim' \
+        'rpackages'         '2. R packages' \
+        'install_pandoc'    '3. pandoc' \
+        'install_python'    '4. python' \
+        'sourcecodepro'     '5. Source Code Pro' \
+        'travis'            '6. travis-ci client' \
+        'latexpkgs'         '7. latex packages' \
+        'gdal_install'      '8. GDAL' \
+        3>&1 1>&2 2>&3)
+     
+    exitstatus=$?
+    if [ $exitstatus = 0 ]; then
+        $NONAPT
+    else
+        main
+    fi
+}

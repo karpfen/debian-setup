@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# install R packages
+function rpackages {
+    if [ -z $RPKGS_NI ]
+    then
+        whiptail --title "R packages" --msgbox "All R packages installed." 8 78
+        nonapt
+    elif (eval `resize` && whiptail \
+        --title "R Packages" \
+        --yesno "Current list of R packages to install: \n\n${RPKGS_NI[*]\\} \n\nProceed with installation?" \
+        $LINES $COLUMNS $(( $LINES - 12 )) \
+        --scrolltext) then
+        show_header 'Installing...'
+        show_warning 'Requires root privileges'
+        if [ -d "$RLIBLOC" ]; then
+            for i in ${RPKGS_NI[@]}; do
+                CMD='install.packages('\"${i}\"',repos='\"$CRAN\"',lib='\"$RLIBLOC\"')'
+                 Rscript --verbose -e $CMD
+            done 
+        else
+            for i in ${RPKGS_NI[@]}; do
+                CMD='install.packages('\"${i}\"',repos='\"$CRAN\"')'
+                 Rscript --verbose -e $CMD
+            done 
+        fi
+
+        # Done
+        show_success 'Done.'
+        nonapt
+    else
+        nonapt
+    fi
+}

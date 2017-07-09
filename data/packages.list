@@ -1,0 +1,79 @@
+autotools-dev # packages.list can include comments
+checkinstall
+clang-3.9 # clang - see apt.llvm.org
+cmake 
+compizconfig-settings-manager 
+compiz-plugins-extra
+dos2unix 
+expat # For GDAL OSM Driver
+exuberant-ctags
+git
+gnome-tweak-tool
+gparted
+gpick
+gsl-bin 
+htop 
+imagemagick 
+jabref 
+kcachegrind
+libboost-all-dev 
+libcgal-dev 
+libclang-3.9-dev # clang - see apt.llvm.org
+libclang-common-3.9-dev # clang - see apt.llvm.org
+libcurl4-openssl-dev 
+libeigen3-dev 
+libgeos-dev
+libglu1-mesa-dev
+libgeos++-dev
+libgmp3-dev
+libgsl-dev 
+libllvm3.9 # clang - see apt.llvm.org
+libproj-dev
+libpq-dev # for RPostgreSQL
+libspatialite-dev
+libspatialite3
+libsqlite3-dev 
+libsqlite3-0 
+libssl-dev
+libudunits2-dev # for R units via sp
+libx11-dev 
+libxml2-dev 
+libzip-dev 
+lldb-3.9 # clang - see apt.llvm.org
+llvm-3.9 # clang - see apt.llvm.org
+llvm-3.9-dev # clang - see apt.llvm.org
+lua5.1 
+liblua5.1-0-dev # lua5.1-dev for vim
+lxd 
+mesa-common-dev 
+mc 
+nautilus-dropbox
+neovim
+openjdk-8-jre
+openjdk-8-jdk
+pdftk
+postgis
+postgresql
+postgresql-contrib
+python3-dev 
+python-bs4 
+python-dev 
+python-regex 
+qgis
+qrencode
+r-base 
+r-base-dev
+r-cran-rjava
+rsync
+ruby-dev 
+ubuntu-restricted-extras 
+ssh
+sqlite3 
+thunderbird
+tmux 
+tree 
+valgrind 
+vim-latexsuite
+vlc 
+zathura # for Nvim-r
+zfsutils-linux

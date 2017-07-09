@@ -1,0 +1,189 @@
+#!/bin/bash
+
+PFILE=$HOME"/.vim/autoload/pathogen.vim"
+
+function install_vim_core {
+    # This is mostly from
+    # https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+     apt-get remove vim vim-runtime gvim
+    # That doesn't really work because vim is compiled from source. The only way
+    # I've found to remove it is to manually remove the "vim" directories from
+    # "/usr/share", "/usr/local/share" and "/usr/local/bin"
+    
+    HDIR=0
+    if [[ $PWD = $HOME ]]
+    then
+        cd ./Downloads # because .vim sits in home
+        HDIR=1
+    fi
+    git clone https://github.com/vim/vim.git
+    # Install package(s)
+    show_info $INST_UPDATE_VERB' '$NAME'...'
+    show_warning 'Requires root privileges'
+    # ----- The "official" github.com/vim/vim way:
+    #cd vim/src
+    #make distclean
+    #make
+    # make install
+    # ----- Or the Valloric way (modified a bit)
+    cd vim
+    ./configure --with-features=huge \
+        --enable-multibyte \
+        --enable-python3interp=yes \
+        --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
+        --enable-python3interp=yes \
+        --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
+        --enable-gui=gtk2 --enable-cscope --prefix=/usr
+    make VIMRUNTIMEDIR=/usr/share/vim/vim80
+    #make
+     make install
+    # Cleanup and finish
+    cd ..
+    rm -rf vim
+    if [ $HDIR -eq 0 ]
+    then
+        cd ..
+    fi
+}
+
+function pathogen {
+    PNAME="pathogen"
+    if [ ! -e $PFILE ]; then
+        show_info 'installing '$PNAME
+        mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+            curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    else
+        whiptail --title $PNAME --msgbox "$PNAME already installed." 8 78
+        show_info $PNAME' already installed'
+    fi
+}
+
+function solarized {
+    #show_info '---in solarized---'
+    PFILE=$HOME"/.vim/autoload/pathogen.vim"
+    if [ ! -e $PFILE ]; then
+        pathogen
+        show_info 'installing '$PNAME
+    fi
+    SOLDIR=$HOME"/.vim/bundle/vim-colors-solarized/"
+    SOLNAME="vim-colors-solarized"
+    if [ -d $SOLDIR ]; then
+        whiptail --title $SOLNAME --msgbox "$SOLNAME already installed." 8 78
+        show_info "$SOLNAME already installed."
+    else
+        show_info "Installing "$SOLNAME
+        pwd=$PWD
+        cd $HOME/.vim/bundle
+        git clone https://github.com/altercation/vim-colors-solarized.git
+        cd vim-colors-solarized
+        mv vim-colors-solarized $HOME/.vim/bundle
+        cd $PWD
+    fi
+}
+
+function browswer {
+    VBDIR="$HOME/.vim/bundle/open-browser.vim"
+
+    if [ ! -d "$VBDIR" ]; then
+        wd=$PWD
+        cd $HOME/.vim/bundle && git clone https://github.com/tyru/open-browser.vim
+        cd $wd
+    else
+        whiptail --title "open-browser.vim" --msgbox "open-browser already installed." 8 78
+        show_info 'open-browser.vim already installed'
+    fi
+}
+
+function vundle {
+    VUNDIR=$HOME"/.vim/bundle/Vundle.vim/"
+    VUNNAME="vundle"
+    if [ -d $VUNDIR ]; then
+        whiptail --title $VUNNAME --msgbox "$VUNNAME already installed." 8 78
+        show_info "$VUNNAME already installed."
+    else
+        show_info "Installing "$VUNNAME
+        git clone https://github.com/Valloric/YouCompleteMe $HOME/.vim/bundle/Vundle.vim
+    fi
+}
+
+function ycm {
+    YCMDIR=$HOME"/.vim/bundle/YouCompleteMe/"
+    YCMNAME="YouCompleteMe"
+    if [ -d $YCMDIR ]; then
+        whiptail --title $YCMNAME --msgbox "$YCMNAME already installed." 8 78
+        show_info "$YCMNAME already installed."
+    else
+        show_info "Installing "$YCMNAME
+        #git clone https://github.com/Valloric/YouCompleteMe $hOME/.vim/bundle/YouCompleteMe
+        vim +PluginInstall +qall
+        $HOME/.vim/bundle/YouCompleteMe/install.py --clang-completer
+    fi
+}
+
+function vimlatex {
+    PKGCHECK=$( vim-addons status | grep "latex suite" | grep "removed")
+    if [ ! "" == "$PKGCHECK" ]
+    then
+         vim-addons install -w latex-suite
+        vim-addons install latex-suite
+    else
+        show_info "latex-suite already installed"
+        whiptail --title "vim-latexsuite" --msgbox "vim-latexsuite already installed." 8 78
+    fi
+}
+
+function nvimr {
+    # Stable version at:
+    # http://www.vim.org/scripts/script.php?script_id=2628
+    # This is a pathogen install of the current git version
+    NVRDIR=$HOME"/.vim/bundle/Nvim-R/"
+    NVRNAME="nvim-r"
+    if [ -d $NVRDIR ]; then
+        whiptail --title $NVRNAME --msgbox "$NVRNAME already installed." 8 78
+        show_info "$NVRNAME already installed."
+    else
+        show_info "Installing "$NVRNAME
+        pwd=$PWD
+        git clone https://github.com/jalvesaq/Nvim-R $NVRDIR
+    fi
+}
+
+# install_vim
+function install_vim {
+	# Variables
+	PACKAGE=vim
+	NAME="vim"
+    PKGCHECK=$(dpkg-query -W --showformat='${Status}\n' $PACKAGE|grep "install ok installed")
+    if [ "" == "$PKGCHECK" ]; then
+        INST_UPDATE="installation"
+        INST_UPDATE_VERB="Installing"
+    else
+        INST_UPDATE="update"
+        INST_UPDATE_VERB="Updating"
+    fi
+    if (whiptail --title "vim" --yesno "Begin $NAME $INST_UPDATE?" 8 78) then
+        # Install
+        show_header 'Begin '$NAME' '$INST_UPDATE
+        # Install git if not installed
+        GITCHECK=$(dpkg-query -W --showformat='${Status}\n' git|grep "install ok installed")
+        if [ "" == "$GITCHECK" ]; then
+            echo 'installing git first ...'
+             apt-get install -y git
+        fi
+        install_vim_core
+    fi
+
+    pathogen
+    solarized
+    browswer
+    vundle
+    ycm
+    vim +PluginInstall +qall
+    vimlatex
+    nvimr
+
+    # Done
+    show_success 'Done.'
+    #whiptail --title "Finished" --msgbox "$INST_UPDATE_VERB $NAME complete." 8 78
+    nonapt
+}

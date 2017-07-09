@@ -1,0 +1,35 @@
+#!/bin/bash
+
+function install_pandoc_core {
+    URL=$(curl -s https://api.github.com/repos/jgm/pandoc/releases | \
+        grep browser_download_url | head -n 1 | cut -d '"' -f 4)
+     wget $URL
+    show_header 'installing '$NAME' ...'
+    file=${URL#https://github.com/jgm/pandoc/releases/download/}
+    file=${file#*/}
+     dpkg -i $file
+    # Cleanup and finish
+    rm -rf $file
+}
+
+# install_pandoc - not complete coz lacks version comparison
+function install_pandoc {
+	# Variables
+	PACKAGE=pandoc
+	NAME="pandoc"
+    PKGCHECK=$(dpkg-query -W --showformat='${Status}\n' $PACKAGE|grep "install ok installed")
+    if [ "" == "$PKGCHECK" ]; then
+        INST_UPDATE="installation"
+        INST_UPDATE_VERB="Installing"
+    else
+        INST_UPDATE="update"
+        INST_UPDATE_VERB="Updating"
+    fi
+	# Install
+	show_header 'Begin '$NAME' '$INST_UPDATE
+    install_pandoc_core
+    # Done
+    show_success 'Done.'
+    whiptail --title "Finished" --msgbox "$INST_UPDATE_VERB $NAME complete." 8 78
+    nonapt
+}

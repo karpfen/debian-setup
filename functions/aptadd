@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# recieve new apt keys
+function addkeys {
+    show_info 'adding keys ... ' $(cat $KEYS)
+     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $(cat $KEYS)
+    # clang from apt.llvm.org
+    wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add -
+    show_success 'apt keys added'
+}
+
+# add new apt repositories
+# TODO: Add check for only if not existent
+function addrepos {
+    show_info 'adding repos ... ' "$(cat $REPOS)"
+    while read F ; do
+         add-apt-repository "$F"
+    done < $REPOS
+     apt-get update
+    show_success 'apt repositories added'
+}
+
+# Install packages listed in 'data/packages.list'
+function addapt {
+    if (eval `resize` && whiptail \
+        --title "Apt Repositories" \
+        --yesno "apt keys to recieve: \n\n$(cat $KEYS) \n\nRepositories to add: \n\n$(cat $REPOS)" \
+        $LINES $COLUMNS $(( $LINES - 12 )) \
+        --scrolltext) then
+        show_info 'Installing...'
+        show_warning 'Requires root privileges'
+        addkeys
+        addrepos
+
+        # Done
+        show_success 'Done.'
+        # Check
+        EXITSTATUS=$1
+        if [[ $EXITSTATUS != 0 ]]; then
+            # Already installed
+            show_success 'Already installed.'
+            whiptail --title "Finished" --msgbox "apt keys and repositories added." 8 78
+            main
+        else
+            whiptail --title "Finished" --msgbox "Installation complete." 8 78
+            main
+        fi
+    else
+        main
+    fi
+}

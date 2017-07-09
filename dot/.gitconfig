@@ -1,0 +1,20 @@
+[user]
+    name = Andreas Petutschnig
+    email = andreas@petutschnig.de
+[core]
+	autocrlf = input
+	safecrlf = true
+[alias]
+    co = checkout
+    ci = commit
+    st = status -uno
+    br = branch
+    hist = log --graph --all --date=short --pretty=format:'%Cred%h%Creset%x09%ad - %Cgreen%d%Cblue%s%Creset'
+    type = cat-file -t
+    dump = cat-file -p
+
+[push]
+    default = simple
+
+[credential]
+    helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring

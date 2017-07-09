@@ -1,0 +1,104 @@
+#!/bin/bash
+
+function non_inst_packages {
+    PKGS_NI=()
+    show_info_red "checking apt package installation status ... "
+    while read F; do
+        # cut comments from package names and remove all whitespace
+        PF=$(echo $F | cut -d "#" -f 1 | tr -d '[:space:]') 
+        PKGCHECK=$(dpkg-query -W --showformat='${Status}\n' $PF 2>&1|grep "install ok installed")
+        if [ "" == "$PKGCHECK" ]; then
+            PKGS_NI+=($PF)
+        fi
+    done < <(cat $PKGS $PKGST)
+}
+
+function gdal_install {
+    GDAL_URL="http://download.osgeo.org/gdal/CURRENT/"
+    wget -O temp.html $GDAL_URL
+    GDAL_VERSION=`cat temp.html | grep -o -P '(?<=gdal-).*(?=.tar.gz\")'`
+    GDAL_FILE="gdal-"$GDAL_VERSION".tar.gz"
+    rm temp.html
+    wget $GDAL_URL$GDAL_FILE
+    tar zxf $GDAL_FILE
+    cd "gdal-"$GDAL_VERSION
+    ./configure --with-sqlite3 --with-expat
+    # Driver support can be checked by inspecting configure output, or by
+    # $ gdal-config --formats
+    make
+     make install
+    cd ..
+    rm -rf "gdal-"$GDAL_VERSION $GDAL_FILE $GDAL_FILE
+}
+
+function gdal {
+    GNAME="GDAL"
+    if hash gdalinfo 2>/dev/null; then
+        show_info "GDAL installed"
+        VERS=$(eval "gdalinfo --version" | head -n 2 | cut -d " " -f 2)
+        MAJOR=$(echo $VERS | cut -d "." -f 1)
+        MINOR=$(echo $VERS | cut -d "." -f 1)
+        if [ $MAJOR -lt 2 ]; then
+            if (whiptail --title $GNAME --yesno "$GNAME version < 2; upgrade?." 8 78) then
+                gdal_install
+            fi
+        fi
+    else
+        if (whiptail --title $GNAME --yesno "$GNAME not installed; install?." 8 78) then
+            gdal_install
+        fi
+    fi
+}
+
+function pgresql_switch {
+    # Not used at at present
+    # default bash streams are 0=std in, 1=std out, 2=error, so 2>&1 sends
+    # errors to std out.
+    PKGCHECK=$(psql 2>&1|grep "FATAL") # no postgres user
+    if [ ! "" == "$PKGCHECK" ]; then 
+        show_info "Estalishing posgres user"
+         -u -i postgres # establish "postgres" as user
+    fi
+}
+
+# Install packages listed in 'data/packages.list'
+# TODO: gdal and pgresql_check are only run if there are non-installed packages
+# - rearrange to run them every time.
+function packages {
+    non_inst_packages
+    gdal
+
+    if [ ${#PKGS_NI[@]} -eq 0 ]; then
+        whiptail --title "Packages Installed" --msgbox "All packages already installed." 8 78
+        main
+    elif (eval `resize` && whiptail \
+        --title "Packages" \
+        --yesno "Current list of packages to install: \n\n${PKGS_NI[*]\\} \n\nProceed with installation?" \
+        $LINES $COLUMNS $(( $LINES - 12 )) \
+        --scrolltext) then
+        show_info 'Installing...'
+        show_warning 'Requires root privileges'
+        for i in ${PKGS_NI[@]}; do
+             apt-get install -y ${i}
+        done
+
+         R CMD javareconf
+        gdal
+
+        # Done
+        show_success 'Done.'
+        # Check
+        EXITSTATUS=$1 # Not used here. TODO: Fix this?
+        if [[ $EXITSTATUS != 0 ]]; then
+            # Already installed
+            show_success 'Already installed.'
+            whiptail --title "Finished" --msgbox "All packages installed." 8 78
+            main
+        else
+            whiptail --title "Finished" --msgbox "All packages installed." 8 78
+            main
+        fi
+    else
+        main
+    fi
+}
