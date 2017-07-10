@@ -10,7 +10,7 @@ source $DIR/functions/non-apt/rpackages
 # Install packages listed in 'data/packages.list'
 function doall {
     whiptail --title "NOTE"  --msgbox "Prior to running doall, software-properties-common may need to be reinstalled - check first!" 8 78
-    show_info "check with $ apt-get install software-properties-common"
+    show_info "check with $ apt install software-properties-common"
     if (eval `resize` && whiptail \
         --title "Everything" \
         --yesno "Install and setup whole system non-interactively?" \
@@ -31,7 +31,7 @@ function doall {
             PKGCHECK=$(dpkg-query -W --showformat='${Status}\n' $PF|grep "install ok installed")
             if [ "" == "$PKGCHECK" ]
             then
-                 apt-get install -y $PF
+                 apt install -y $PF
             else
                 echo "package "$PF" already installed"
             fi
@@ -57,7 +57,7 @@ function doall {
         install_sourcecodepro
         # ---non-apt/travis
          -nv
-         apt-get install -y ruby-dev
+         apt install -y ruby-dev
          gem install travis --no-rdoc --no-ri
         # ---non-apt/rpackages
          -nv

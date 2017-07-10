@@ -79,7 +79,7 @@ function packages {
         show_info 'Installing...'
         show_warning 'Requires root privileges'
         for i in ${PKGS_NI[@]}; do
-             apt-get install -y ${i}
+             apt install -y ${i}
         done
 
          R CMD javareconf

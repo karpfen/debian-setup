@@ -16,7 +16,7 @@ function addrepos {
     while read F ; do
          add-apt-repository "$F"
     done < $REPOS
-     apt-get update
+     apt update
     show_success 'apt repositories added'
 }
 

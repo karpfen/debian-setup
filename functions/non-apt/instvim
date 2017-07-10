@@ -5,7 +5,7 @@ PFILE=$HOME"/.vim/autoload/pathogen.vim"
 function install_vim_core {
     # This is mostly from
     # https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
-     apt-get remove vim vim-runtime gvim
+     apt remove vim vim-runtime gvim
     # That doesn't really work because vim is compiled from source. The only way
     # I've found to remove it is to manually remove the "vim" directories from
     # "/usr/share", "/usr/local/share" and "/usr/local/bin"
@@ -168,7 +168,7 @@ function install_vim {
         GITCHECK=$(dpkg-query -W --showformat='${Status}\n' git|grep "install ok installed")
         if [ "" == "$GITCHECK" ]; then
             echo 'installing git first ...'
-             apt-get install -y git
+             apt install -y git
         fi
         install_vim_core
     fi
