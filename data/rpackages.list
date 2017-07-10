@@ -32,6 +32,7 @@ osmar
 plyr
 poweRlaw
 pracma
+quanteda
 quantreg
 R.utils # stplanr dep
 R2Cuba
@@ -40,6 +41,7 @@ raster
 Rcpp
 RcppArmadillo # stplanr dep
 RCurl
+readtext
 readxl
 rgdal
 rgeos
