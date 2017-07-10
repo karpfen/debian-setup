@@ -16,6 +16,7 @@ htop
 imagemagick 
 jabref 
 kcachegrind
+libapparmor-dev
 libboost-all-dev 
 libcgal-dev 
 libclang-3.9-dev # clang - see apt.llvm.org
@@ -28,6 +29,7 @@ libgeos++-dev
 libgmp3-dev
 libgsl-dev 
 libllvm3.9 # clang - see apt.llvm.org
+libpoppler-cpp-dev
 libproj-dev
 libpq-dev # for RPostgreSQL
 libspatialite-dev
