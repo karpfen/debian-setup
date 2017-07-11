@@ -58,8 +58,10 @@ postgis
 postgresql
 postgresql-contrib
 python3-dev 
+python3-neovim 
 python-bs4 
 python-dev 
+python-neovim 
 python-regex 
 qgis
 qrencode
