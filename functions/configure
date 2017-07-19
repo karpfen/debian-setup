@@ -42,6 +42,12 @@ function dotfiles_cp {
     configure
 }
 
+# todo list
+function todo_cp {
+    cp -r ../dot/.todo "$HOME/"
+    show_success 'Copied todo config to home directory.'
+}
+
 # Configure System
 function configure {
     eval `resize`
@@ -54,7 +60,9 @@ function configure {
         preferences '1. Set preferred application-specific & desktop settings' \
         dotfiles    '2. Download/replace all dotfiles' \
         dotfiles_cp '3. Copy dotfiles to git repo' \
-        3>&1 1>&2 2>&3)
+        dotfiles_cp '3. Copy dotfiles to git repo' \
+        todo_cp '4. Copy todo-txt configuration to home directory' \
+        4>&1 3>&2 1>&3 2>&4)
      
     exitstatus=$?
     if [ $exitstatus = 0 ]; then

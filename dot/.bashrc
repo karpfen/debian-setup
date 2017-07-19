@@ -150,6 +150,7 @@ alias du='ncdu'
 alias run='xdg-open'
 #dump clipboard to file
 alias dclip='xclip -o > clipboard.txt'
+alias t='todo-txt'
 
 function extract {
  if [ -z "$1" ]; then
