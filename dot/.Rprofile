@@ -81,20 +81,18 @@ attach(.env)
         message (bl, bot_half, ' R ', bot_half, bot)
         message ('')
 
-        if (curl::has_internet ())
+        chk_file <- "~/.Rold_pkg_check"
+        do_check <- TRUE
+        today <- strsplit (as.character (Sys.time ()), " ") [[1]] [1]
+        if (file.exists (chk_file))
         {
-            # only check for new packages once per day
-            chk_file <- "~/.Rold_pkg_check"
-            do_check <- TRUE
-            today <- strsplit (as.character (Sys.time ()), " ") [[1]] [1]
-            if (file.exists (chk_file))
-            {
-                chk_date <- utils::read.table (chk_file, as.is = TRUE) [1, 1]
-                if (chk_date == today)
-                    do_check <- FALSE
-            }
-            write (today, file = chk_file)
-            if (do_check)
+            chk_date <- utils::read.table (chk_file, as.is = TRUE) [1, 1]
+            if (chk_date == today)
+                do_check <- FALSE
+        }
+        if (do_check)
+        {
+            if (curl::has_internet ())
             {
                 message ('Old package check for ', today, ' : ',
                          appendLF = FALSE)
@@ -104,9 +102,11 @@ attach(.env)
                              do.call (paste, as.list (rownames (old))), '\n')
                 else
                     message ('All packages up to date\n')
-            }
-        } else
-            message ('nope, no internet\n')
+                # only check for new packages once per day
+                write (today, file = chk_file)
+            } else
+                message ('nope, no internet\n')
+        }
     }
 }
 
