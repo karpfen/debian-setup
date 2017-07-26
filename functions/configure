@@ -8,35 +8,17 @@ function preferences {
     configure
 }
 
-# dot files
-function dotfiles {
-    show_info 'Downloading dot-files...'
-    WD=$PWD
-    eval cd $HOME
-    curl -O https://raw.githubusercontent.com/mpadge/ubuntu-setup/master/dot/.Rprofile
-    curl -O https://raw.githubusercontent.com/mpadge/ubuntu-setup/master/dot/.bashrc
-    curl -O https://raw.githubusercontent.com/mpadge/ubuntu-setup/master/dot/.tmux.conf
-    curl -O https://raw.githubusercontent.com/mpadge/ubuntu-setup/master/dot/.vimrc
-    curl -O https://raw.githubusercontent.com/mpadge/ubuntu-setup/master/dot/.gitconfig
-    curl -O https://raw.githubusercontent.com/mpadge/ubuntu-setup/master/dot/.inputrc
-    eval cd $WD
-    # Done
-    show_success 'Done.'
-    whiptail --title "Finished" --msgbox "dot files downloaded successfully." 8 78
-    configure
-}
-
 # dot files copy
 function dotfiles_cp {
-    show_info 'Copying dot-files to git repo...'
-    cp $HOME/.bash_aliases /data/Dropbox/mark/system/ubuntu-setup/dot/.bash_aliases
-    cp $HOME/.Rprofile /data/Dropbox/mark/system/ubuntu-setup/dot/.Rprofile
-    cp $HOME/.bashrc /data/Dropbox/mark/system/ubuntu-setup/dot/.bashrc
-    cp $HOME/.vimrc /data/Dropbox/mark/system/ubuntu-setup/dot/.vimrc
-    cp $HOME/.tmux.conf /data/Dropbox/mark/system/ubuntu-setup/dot/.tmux.conf
-    cp $HOME/.gitconfig /data/Dropbox/mark/system/ubuntu-setup/dot/.gitconfig
-    cp $HOME/.inputrc /data/Dropbox/mark/system/ubuntu-setup/dot/.inputrc
-    # Done
+    show_info 'Copying dot files to home directory...'
+    cp ../dot/.bash_aliases "$HOME/"
+    cp ../dot/.Rprofile "$HOME/"
+    cp ../dot/.bashrc "$HOME/"
+    cp ../dot/.vimrc "$HOME/"
+    cp ../dot/.tmux.conf "$HOME/"
+    cp ../dot/.gitconfig "$HOME/"
+    cp ../dot/.inputrc "$HOME/"
+
     show_success 'Done.'
     whiptail --title "Finished" --msgbox "dot files copied successfully." 8 78
     configure
@@ -58,11 +40,9 @@ function configure {
         --cancel-button "Go Back" \
         $LINES $COLUMNS $(( $LINES - 12 )) \
         preferences '1. Set preferred application-specific & desktop settings' \
-        dotfiles    '2. Download/replace all dotfiles' \
-        dotfiles_cp '3. Copy dotfiles to git repo' \
-        dotfiles_cp '3. Copy dotfiles to git repo' \
-        todo_cp '4. Copy todo-txt configuration to home directory' \
-        4>&1 3>&2 1>&3 2>&4)
+        dotfiles_cp '2. Copy dot files to home directory' \
+        todo_cp '3. Copy todo-txt configuration to home directory' \
+        3>&1 2>&2 1>&3)
      
     exitstatus=$?
     if [ $exitstatus = 0 ]; then
