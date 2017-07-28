@@ -94,7 +94,7 @@ fi
 alias ll='ls -lFh'
 alias la='ls -lFhA'
 alias l='ls -CF'
-alias vim="nvim"
+# alias vim="nvim"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -150,7 +150,7 @@ alias du='ncdu'
 alias run='xdg-open'
 #dump clipboard to file
 alias dclip='xclip -o > clipboard.txt'
-alias t='todo-txt'
+alias t='todo-txt -d ~/.todo-txt/config'
 
 function extract {
  if [ -z "$1" ]; then

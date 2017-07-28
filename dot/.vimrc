@@ -2,6 +2,7 @@
 "
 runtime! debian.vim 
 
+set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'jalvesaq/Nvim-R'
@@ -11,6 +12,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'jimhester/lintr'
+Plugin 'tyru/open-browser.vim'
+Plugin 'edkolev/tmuxline.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -20,6 +23,7 @@ filetype plugin indent on
 let g:airline_theme='term'
 " show all open buffers on top
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
 " nice looking things
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -154,8 +158,9 @@ let R_assign = 0
 
 let g:R_in_buffer = 0
 let g:R_tmux_split = 1
-"let g:R_rconsole_width = winwidth("%") / 2
-let g:R_rconsole_width = 120
+" autocmd VimResized * let R_rconsole_width = winwidth(0) / 2
+let g:R_rconsole_height = winheight(0)
+let g:R_rconsole_width = winwidth(0) / 2
 let g:R_nvimpager = "horizontal"
 let R_args = ['--no-save', '--quiet']
 let R_tmux_title = 'R'
@@ -249,7 +254,7 @@ endfunction
 " set same widths for text files too
 autocmd BufNewFile,BufRead *.txt set textwidth=144 | set colorcolumn=150
 autocmd BufNewFile,BufRead *.md set textwidth=144 | set colorcolumn=150
-autocmd BufNewFile,BufRead *.Rmd set textwidth=144 | set colorcolumn=150
+" autocmd BufNewFile,BufRead *.Rmd set textwidth=144 | set colorcolumn=150
 autocmd BufNewFile,BufRead ~/R/osmprob/* set textwidth=80 | set colorcolumn=81
 
 " =============== WORD COUNT FUNCTION =============
