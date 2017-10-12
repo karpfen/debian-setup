@@ -19,6 +19,7 @@ ggmap
 gridBase
 httr
 igraph
+kerasR
 knitr
 leaflet
 lubridate
