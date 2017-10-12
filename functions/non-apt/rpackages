@@ -8,7 +8,7 @@ function rpackages {
         nonapt
     elif (eval `resize` && whiptail \
         --title "R Packages" \
-        --yesno "Current list of R packages to install: \n\n${RPKGS_NI[*]\\} \n\nProceed with installation?" \
+        --yesno "Current list of R packages to install: \n\n${RPKGS_NI[*]} \n\nProceed with installation?" \
         $LINES $COLUMNS $(( $LINES - 12 )) \
         --scrolltext) then
         show_header 'Installing...'
@@ -16,12 +16,12 @@ function rpackages {
         if [ -d "$RLIBLOC" ]; then
             for i in ${RPKGS_NI[@]}; do
                 CMD='install.packages('\"${i}\"',repos='\"$CRAN\"',lib='\"$RLIBLOC\"')'
-                 Rscript --verbose -e $CMD
+                Rscript --verbose -e $CMD
             done 
         else
             for i in ${RPKGS_NI[@]}; do
                 CMD='install.packages('\"${i}\"',repos='\"$CRAN\"')'
-                 Rscript --verbose -e $CMD
+                Rscript --verbose -e $CMD
             done 
         fi
 

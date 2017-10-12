@@ -73,7 +73,7 @@ function packages {
         main
     elif (eval `resize` && whiptail \
         --title "Packages" \
-        --yesno "Current list of packages to install: \n\n${PKGS_NI[*]\\} \n\nProceed with installation?" \
+        --yesno "Current list of packages to install: \n\n${PKGS_NI[*]} \n\nProceed with installation?" \
         $LINES $COLUMNS $(( $LINES - 12 )) \
         --scrolltext) then
         show_info 'Installing...'
