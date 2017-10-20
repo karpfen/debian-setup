@@ -26,7 +26,7 @@ function gdal_install {
     # Driver support can be checked by inspecting configure output, or by
     # $ gdal-config --formats
     make
-     make install
+    make install
     cd ..
     rm -rf "gdal-"$GDAL_VERSION $GDAL_FILE $GDAL_FILE
 }
@@ -82,7 +82,7 @@ function packages {
              apt install -y ${i}
         done
 
-         R CMD javareconf
+        R CMD javareconf
         gdal
 
         # Done
