@@ -1,3 +1,4 @@
 deb http://qgis.org/debian stretch main
 deb-src http://qgis.org/debian stretch main
 deb http://cran.r-project.org/bin/linux/debian jessie-cran34/
+ppa:remmina-ppa-team/remmina-next

@@ -49,6 +49,7 @@ libcgal-dev
 libclang-3.9-dev
 libcurl4-openssl-dev
 libeigen3-dev
+libfreerdp-plugins-standard
 libgdal1i
 libgdal20
 libgeos-dev
@@ -123,6 +124,8 @@ qrencode
 r-base
 r-base-dev
 r-cran-rjava
+remmina
+remmina-plugin-rdp
 ruby-dev
 scribus
 silversearcher-ag
