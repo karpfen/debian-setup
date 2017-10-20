@@ -151,12 +151,13 @@ alias run='xdg-open'
 #dump clipboard to file
 alias dclip='xclip -o > clipboard.txt'
 alias t='todo-txt -d ~/.todo-txt/config'
+alias rupdate='echo "update.packages (ask = FALSE)" | R --no-save -q'
 
 function extract {
- if [ -z "$1" ]; then
+if [ -z "$1" ]; then
     # display usage if no parameters given
     echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
- else
+else
     if [ -f $1 ] ; then
         # NAME=${1%.*}
         # mkdir $NAME && cd $NAME
@@ -181,5 +182,17 @@ function extract {
     else
         echo "$1 - file does not exist"
     fi
+fi
+}
+
+function github_update_fork {
+if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: github_update_fork username/repository"
+ else
+    git remote add upstream https://github.com/$1.git
+    git fetch upstream
+    git checkout master
+    git rebase upstream/master
 fi
 }

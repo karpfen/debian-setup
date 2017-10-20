@@ -213,9 +213,9 @@ let g:syntastic_cpp_clang_check_quiet_messages = {"regex":
     \ ['file not found']}
 
 " jimhester/lintr:
-let g:syntastic_enable_r_lintr_checker = 1
+let g:syntastic_enable_r_lintr_checker = 0
 let g:syntastic_r_checkers = ['lintr']
-let g:syntastic_enable_rmd_lintr_checker = 1
+let g:syntastic_enable_rmd_lintr_checker = 0
 let g:syntastic_rmd_checkers = ['lintr']
 function! SyntasticCheckHook(errors)
     if !empty(a:errors)
@@ -253,7 +253,7 @@ endfunction
 
 " set same widths for text files too
 autocmd BufNewFile,BufRead *.txt set textwidth=144 | set colorcolumn=150
-autocmd BufNewFile,BufRead *.md set textwidth=144 | set colorcolumn=150
+" autocmd BufNewFile,BufRead *.md set textwidth=144 | set colorcolumn=150
 " autocmd BufNewFile,BufRead *.Rmd set textwidth=144 | set colorcolumn=150
 autocmd BufNewFile,BufRead ~/R/osmprob/* set textwidth=80 | set colorcolumn=81
 
@@ -320,3 +320,6 @@ cmap w!! w !sudo tee > /dev/null %
 
 " open each buffer in its own tabpage
 ":au BufAdd,BufNewFile * nested tab sball
+
+" press <F9> to execute the current buffer in python
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>

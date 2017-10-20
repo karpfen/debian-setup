@@ -111,5 +111,7 @@ attach(.env)
 }
 
 
-#if(Sys.getenv('TERM') == 'xterm-256color')
-#    library('colorout')
+if(Sys.getenv('TERM') == 'xterm-256color')
+    library('colorout')
+Sys.setenv("PKG_CXXFLAGS"="-fopenmp")
+Sys.setenv("PKG_LIBS"="-fopenmp")
