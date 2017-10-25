@@ -14,13 +14,14 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'jimhester/lintr'
 Plugin 'tyru/open-browser.vim'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'dracula/vim'
 call vundle#end()
 filetype plugin indent on
 
 "execute pathogen#infect()
 
 " configure vim-airline
-let g:airline_theme='term'
+let g:airline_theme='base16_atelierdune'
 " show all open buffers on top
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
@@ -32,14 +33,15 @@ let g:airline_right_alt_sep = ''
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+let g:airline_symbols = {}
 endif
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 
 " https://github.com/sickill/vim-monokai
 " needs to be put in .config/nvim/colors/
-colorscheme monokai
+" colorscheme monokai
+colorscheme dracula
 
 if has("syntax")
     syntax enable
@@ -79,7 +81,8 @@ set relativenumber
 set nu "line numbering
 set wrap
 set textwidth=80
-set colorcolumn=81
+" let &colorcolumn=81
+let &colorcolumn=join(range(81,999),",")
 set undofile
 "global searches, so :%s/foo/bar/g automatically becomes :%s/foo/bar
 set gdefault 
@@ -174,7 +177,7 @@ let r_syntax_folding = 1
 
 " define global YCM config
 " https://jonasdevlieghere.com/a-better-youcompleteme-config/
-let g:ycm_global_ycm_extra_conf = '~/.nvim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 "-------------------------------------------
 "-------------   syntastic   ---------------
@@ -247,12 +250,12 @@ let g:tex_flavor='latex'
 
 autocmd BufRead,BufNewFile *.tex call CheckFileType()
 function! CheckFileType()
-    set textwidth=144
-    set colorcolumn=150
+    set textwidth=80
+    set colorcolumn=81
 endfunction
 
 " set same widths for text files too
-autocmd BufNewFile,BufRead *.txt set textwidth=144 | set colorcolumn=150
+" autocmd BufNewFile,BufRead *.txt set textwidth=144 | set colorcolumn=150
 " autocmd BufNewFile,BufRead *.md set textwidth=144 | set colorcolumn=150
 " autocmd BufNewFile,BufRead *.Rmd set textwidth=144 | set colorcolumn=150
 autocmd BufNewFile,BufRead ~/R/osmprob/* set textwidth=80 | set colorcolumn=81
@@ -323,3 +326,5 @@ cmap w!! w !sudo tee > /dev/null %
 
 " press <F9> to execute the current buffer in python
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+" highlight ColorColumn ctermbg=235 guibg=#F8DF9B

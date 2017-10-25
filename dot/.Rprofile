@@ -45,7 +45,7 @@ attach(.env)
 
         lns <- list ()
         lns [[1]] <- paste0 (rv, '--- \'', rn, '\'')
-        lns [[2]] <- paste0 ('Ubuntu ', ss, ' (kernel ', rsys ['release'], ')')
+        lns [[2]] <- paste0 ('Debian ', ss, ' (kernel ', rsys ['release'], ')')
         lns [[3]] <- paste0 ('machine = ', rpl, ': ', rsys ['nodename'])
         lns [[4]] <- paste0 ('wd: ', getwd ())
         lns <- sapply (lns, function (i)

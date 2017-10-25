@@ -122,7 +122,7 @@ fi
 . /etc/bash_completion
 
 # Essential line to get tmux to work with solarized:
-#export TERM=screen-256color-bce
+export TERM=screen-256color-bce
 
 # Nvim-r-plugin requires its own line in .vimrc to achieve this
 alias R='R --no-save --quiet'
