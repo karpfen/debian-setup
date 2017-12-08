@@ -196,3 +196,7 @@ if [ -z "$1" ]; then
     git rebase upstream/master
 fi
 }
+
+function getipaddress {
+    ip route get 8.8.8.8 | awk '{print $NF; exit}'
+}

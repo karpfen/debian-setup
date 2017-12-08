@@ -10,6 +10,7 @@ cubature
 data.table
 devtools
 distr
+dplyr
 extrafont
 fAsianOptions
 fields
@@ -24,6 +25,7 @@ kerasR
 knitr
 leaflet
 lubridate
+magrittr
 maptools
 microbenchmark
 msm
@@ -31,6 +33,7 @@ nabor # stplanr dep
 OpenStreetMap
 openxlsx
 osmar
+parallel
 plyr
 poweRlaw
 pracma

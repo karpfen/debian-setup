@@ -35,7 +35,11 @@ attach(.env)
         #            "stats", "methods", "nvimcom"))
 
         if ('colorout' %in% rownames (utils::installed.packages ()))
+        {
             library (colorout)
+            setOutputColors256 (negnum = 192, zero = 193, number = 230,
+                                normal = 147, verbose = FALSE)
+        }
 
         rv <- R.Version ()$version.string
         rn <- R.Version ()$nickname

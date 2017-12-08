@@ -15,6 +15,7 @@ Plugin 'jimhester/lintr'
 Plugin 'tyru/open-browser.vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'dracula/vim'
+Plugin 'jiangmiao/auto-pairs'
 call vundle#end()
 filetype plugin indent on
 
