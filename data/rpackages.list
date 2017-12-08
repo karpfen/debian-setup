@@ -55,6 +55,7 @@ rmarkdown
 roxygen2 
 RPostgreSQL
 RSQLite
+rts
 rvest
 sf
 signal
