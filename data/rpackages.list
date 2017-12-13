@@ -1,9 +1,9 @@
 adehabitatLT # packages can contain comments
 animation
 bitops
-CircStats
 changepoint
 chron
+CircStats
 codetools
 combinat
 cubature
@@ -39,7 +39,6 @@ poweRlaw
 pracma
 quanteda
 quantreg
-R.utils # stplanr dep
 R2Cuba
 RANN
 raster 
@@ -59,6 +58,7 @@ roxygen2
 RPostgreSQL
 RSQLite
 rts
+R.utils # stplanr dep
 rvest
 sf
 signal

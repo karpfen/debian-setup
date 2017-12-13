@@ -67,8 +67,8 @@ libpoppler-cpp-dev
 libpq-dev
 libproj-dev
 libprotobuf-dev
-libprotoc-dev
 libprotobuf-dev
+libprotoc-dev
 libreoffice-help-en-gb
 libreoffice-l10n-en-za
 libspatialite-dev
@@ -93,8 +93,8 @@ nethogs
 nodejs-legacy
 npm
 okular
-openjdk-8-jre
 openjdk-8-jdk
+openjdk-8-jre
 osmctools
 pandoc
 pdfsam
