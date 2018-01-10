@@ -16,6 +16,7 @@ Plugin 'tyru/open-browser.vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'dracula/vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
 call vundle#end()
 filetype plugin indent on
 
@@ -329,3 +330,6 @@ cmap w!! w !sudo tee > /dev/null %
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 " highlight ColorColumn ctermbg=235 guibg=#F8DF9B
+
+" insert timestamp to document
+nnoremap <buffer> <F4> :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<cr>
