@@ -146,12 +146,24 @@ alias down='cd ~/Downloads'
 alias replaceAllSpaces='for file in *; do mv "$file" `echo $file | tr " " "_"` ; done'
 alias generatePassword='apg -m 20 -x 1 -M SNCL -a 1 -n 1'
 alias histg='history | grep'
-alias du='ncdu'
-alias run='xdg-open'
 #dump clipboard to file
 alias dclip='xclip -o > clipboard.txt'
 alias t='todo-txt -d ~/.todo-txt/config'
 alias rupdate='echo "update.packages (ask = FALSE)" | R --no-save -q'
+alias lll='du -chs *'
+alias g='grep'
+
+function run {
+if [ -z "$1" ]; then
+    echo "Usage: run <file_name>"
+else
+    if [ -f $1 ] ; then
+        xdg-open $1 &> /dev/null
+    else
+        echo "$1 - file does not exist"
+    fi
+fi
+}
 
 function extract {
 if [ -z "$1" ]; then
