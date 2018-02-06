@@ -152,6 +152,7 @@ alias t='todo-txt -d ~/.todo-txt/config'
 alias rupdate='echo "update.packages (ask = FALSE)" | R --no-save -q'
 alias lll='du -chs *'
 alias g='grep'
+alias gi='grep -i'
 
 function run {
 if [ -z "$1" ]; then
