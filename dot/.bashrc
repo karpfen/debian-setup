@@ -154,6 +154,40 @@ alias lll='du -chs *'
 alias g='grep'
 alias gi='grep -i'
 
+function cpc {
+if [ -z "$1" ]; then
+    echo "Usage: mvc <file_name> <directory_name>"
+else
+    if [ -f $1 ] ; then
+        mkdir -p $2
+        cp $1 $2 && cd $2
+    else
+        cp $1 $2 && cd $2
+    fi
+fi
+}
+
+function mvc {
+if [ -z "$1" ]; then
+    echo "Usage: mvc <file_name> <directory_name>"
+else
+    if [ -f $1 ] ; then
+        mkdir -p $2
+        mv $1 $2 && cd $2
+    else
+        mv $1 $2 && cd $2
+    fi
+fi
+}
+
+function mkc {
+if [ -z "$1" ]; then
+    echo "Usage: mkc <directory_name>"
+else
+    mkdir $1 && cd $1
+fi
+}
+
 function run {
 if [ -z "$1" ]; then
     echo "Usage: run <file_name>"
