@@ -25,6 +25,7 @@ kerasR
 knitr
 leaflet
 lubridate
+magick
 magrittr
 maptools
 microbenchmark
