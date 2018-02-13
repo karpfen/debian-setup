@@ -17,6 +17,7 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'dracula/vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
+Plugin 'dhruvasagar/vim-table-mode'
 call vundle#end()
 filetype plugin indent on
 
