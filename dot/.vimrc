@@ -330,7 +330,7 @@ cmap w!! w !sudo tee > /dev/null %
 " press <F9> to execute the current buffer in python
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
-highlight ColorColumn ctermbg=252
+highlight ColorColumn ctermbg=254
 hi Visual term=reverse cterm=reverse
 hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
