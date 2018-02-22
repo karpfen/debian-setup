@@ -24,7 +24,7 @@ filetype plugin indent on
 "execute pathogen#infect()
 
 " configure vim-airline
-let g:airline_theme='base16_atelierdune'
+let g:airline_theme='luna'
 " show all open buffers on top
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
@@ -44,7 +44,7 @@ let g:airline_symbols.readonly = ''
 " https://github.com/sickill/vim-monokai
 " needs to be put in .config/nvim/colors/
 " colorscheme monokai
-colorscheme dracula
+" colorscheme dracula
 
 if has("syntax")
     syntax enable
@@ -172,7 +172,7 @@ let R_args = ['--no-save', '--quiet']
 let R_tmux_title = 'R'
 let g:R_notmuxconf = 1 "use my .tmux.conf, not the Nvim-r one
 
-let r_syntax_folding = 1
+let r_syntax_folding = 0
 
 "-------------------------------------------
 "-----------   YouCompleteMe   -------------
@@ -330,7 +330,10 @@ cmap w!! w !sudo tee > /dev/null %
 " press <F9> to execute the current buffer in python
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
-" highlight ColorColumn ctermbg=235 guibg=#F8DF9B
+highlight ColorColumn ctermbg=252
+hi Visual term=reverse cterm=reverse
+hi Search cterm=NONE ctermfg=grey ctermbg=blue
+
 
 " insert timestamp to document
 nnoremap <buffer> <F4> :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<cr>

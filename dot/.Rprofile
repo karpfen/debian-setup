@@ -37,8 +37,9 @@ attach(.env)
         if ('colorout' %in% rownames (utils::installed.packages ()))
         {
             library (colorout)
-            setOutputColors256 (negnum = 192, zero = 193, number = 230,
-                                normal = 147, verbose = FALSE)
+            setOutputColors256 (negnum = 52, zero = 236, number = 236,
+                                normal = 24, verbose = FALSE, true = 29,
+                                false = 52, date = 3, string = 22)
         }
 
         rv <- R.Version ()$version.string
