@@ -43,6 +43,7 @@ quantreg
 R2Cuba
 RANN
 raster 
+Rclusterpp
 Rcpp
 RcppArmadillo # stplanr dep
 RCurl
