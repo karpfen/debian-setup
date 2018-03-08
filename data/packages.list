@@ -1,7 +1,7 @@
 aptitude
 at
 autotools-dev
-brasero
+blender
 bwidget
 calligra-l10n-engb
 checkinstall
@@ -84,13 +84,11 @@ lua5.1
 lxd
 mailutils
 markdown
-mc
 mendeleydesktop
 mythes-en-au
 nautilus-dropbox
 ncdu
 nemo
-neovim
 nethogs
 nodejs-legacy
 npm
@@ -101,7 +99,6 @@ osmctools
 pandoc
 pdfsam
 pdftk
-pgadmin3
 postgis
 postgresql
 postgresql-contrib
