@@ -47,6 +47,7 @@ Rclusterpp
 Rcpp
 RcppArmadillo # stplanr dep
 RCurl
+rdataretriever
 readtext
 readxl
 rgdal
