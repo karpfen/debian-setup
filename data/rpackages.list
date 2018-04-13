@@ -29,6 +29,7 @@ magick
 magrittr
 maptools
 microbenchmark
+MODIStsp
 msm
 nabor # stplanr dep
 OpenStreetMap
