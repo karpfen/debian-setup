@@ -19,10 +19,10 @@ Plugin 'dracula/vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'dpelle/vim-LanguageTool'
+Plugin 'rhysd/vim-grammarous'
 call vundle#end()
 filetype plugin indent on
-
-"execute pathogen#infect()
 
 " configure vim-airline
 let g:airline_theme='luna'
@@ -335,6 +335,10 @@ highlight ColorColumn ctermbg=254
 hi Visual term=reverse cterm=reverse
 hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
+" Language tool
+let g:languagetool_jar='~/.LanguageTool/LanguageTool-4.1/languagetool-commandline.jar'
+nmap gn :lnext<CR>
+nmap gp :lprevious<CR>
 
 " insert timestamp to document
 nnoremap <buffer> <F4> :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<cr>
