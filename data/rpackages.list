@@ -75,6 +75,7 @@ spatstat
 spdep
 testthat
 tidyverse
+tinytex
 tmap
 topicmodels
 tripack
