@@ -37,9 +37,9 @@ attach(.env)
         if ('colorout' %in% rownames (utils::installed.packages ()))
         {
             library (colorout)
-            setOutputColors256 (negnum = 52, zero = 236, number = 236,
-                                normal = 24, verbose = FALSE, true = 29,
-                                false = 52, date = 3, string = 22)
+            setOutputColors (negnum = 52, zero = 236, number = 236, normal = 24,
+                             verbose = FALSE, true = 29, false = 52, date = 3,
+                             string = 22)
         }
 
         rv <- R.Version ()$version.string
@@ -59,32 +59,7 @@ attach(.env)
                                i <- paste0 (i, ' ')
                            return (i)
                        })
-        nc <- max (sapply (lns, nchar))
-        gap <- 2 # number of character before and after
-        nci <- sapply (lns, nchar, USE.NAMES = FALSE)
-        gaplen <- floor (nc + 2 * gap - nci) / 2
-
-        #for (i in 2500:2600)
-        #    cat(eval(parse(text=paste("\"\\u", i, "\"", sep=""))), " ")
-        top <- "\u2583"
-        bot <- "\u2580"
-        vc <- "\u2588"
-
-        bl <- '  ' # blanks at left side
-        top_half <- paste0 (rep (top, gap + nc / 2 - 1))
-        message (bl, top_half, ' R ', top_half, top)
-        message (paste0 (bl, vc, paste0 (rep (' ', gap + nc + 1),
-                                         collapse = ''), ' ', vc))
-        for (i in 1:length (lns))
-        {
-            gaps <- paste0 (rep (' ', gaplen [i]), collapse = '')
-            message (paste0 (bl, vc, gaps, lns [[i]], gaps, vc))
-        }
-        message (paste0 (bl, vc, paste0 (rep (' ', gap + nc + 1),
-                                         collapse = ''), ' ', vc))
-        bot_half <- paste0 (rep (bot, gap + nc / 2 - 1))
-        message (bl, bot_half, ' R ', bot_half, bot)
-        message ('')
+        print (lns)
 
         chk_file <- "~/.Rold_pkg_check"
         do_check <- TRUE

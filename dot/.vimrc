@@ -25,7 +25,7 @@ call vundle#end()
 filetype plugin indent on
 
 " configure vim-airline
-let g:airline_theme='luna'
+let g:airline_theme='base16_chalk'
 " show all open buffers on top
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
